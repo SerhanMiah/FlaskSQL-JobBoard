@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <h1>Welcome to the Job Board!</h1>
+    <p>Search for jobs or browse our current listings:</p>
+    <a href="/search" class="btn btn-primary">Search Jobs</a>
+    <br><br>
+    {% for job in jobs %}
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title"><a href="/job/{{ loop.index0 }}">{{ job.title }}</a></h2>
+          <p class="card-text">{{ job.description }}</p>
+          <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
+          <p class="card-text"><strong>Salary:</strong> {{ job.salary }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

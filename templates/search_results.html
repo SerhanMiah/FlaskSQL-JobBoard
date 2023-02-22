@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Job Board - Search Results{% endblock %}
+
+{% block content %}
+
+  <h1>Search Results</h1>
+  {% if results %}
+    {% for job in results %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title"><a href="{{ url_for('job_board.job', index=jobs.index(job)) }}">{{ job.title }}</a></h2>
+          <p class="card-text">{{ job.description }}</p>
+          <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
+          <p class="card-text"><strong>Salary:</strong> {{ job.salary }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No results found.</p>
+  {% endif %}
+  <a class="btn btn-primary" href="{{ url_for('job_board.index') }}">Back to Home</a>
+{% endblock %}
