@@ -14,6 +14,7 @@ login_manager.login_message_category = 'info'
 mail = Mail()
 
 
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -27,6 +28,8 @@ def create_app(config_class=Config):
     from project.users.routes import users
     from project.main.routes import main
     from project.job_board.routes import job_board
+
+    # Move the import inside the create_app function
     from project.applicants.routes import applicants_bp
 
     
@@ -34,6 +37,5 @@ def create_app(config_class=Config):
     app.register_blueprint(main)
     app.register_blueprint(job_board)
     app.register_blueprint(applicants_bp)
-
 
     return app

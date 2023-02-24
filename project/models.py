@@ -52,12 +52,14 @@ class Job(db.Model):
 
 class Application(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
-    phone = db.Column(db.String(20), nullable=False)
-    resume = db.Column(db.String(120), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False)
+    phone = db.Column(db.String(255), nullable=False)
+    resume = db.Column(db.String(255), nullable=False)
     date_applied = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     job_id = db.Column(db.Integer, db.ForeignKey('job.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref='applications')
 
     def __repr__(self):
         return f"Application(id={self.id}, name='{self.name}', email='{self.email}', date_applied='{self.date_applied}')"

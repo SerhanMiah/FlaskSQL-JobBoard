@@ -1,31 +1,48 @@
-from flask import Blueprint, render_template, redirect, url_for
-from .forms import ApplicationForm
-from project.models import Job, Application
+import os
+from flask import Blueprint, render_template, redirect, url_for, flash, current_app
 from project import db
 from flask_login import login_required, current_user
+from datetime import datetime
+from werkzeug.utils import secure_filename
+from .forms import ApplicationForm
+from project.models import Job, Application
 
+# Remove this line
+# app = create_app()
 
 applicants_bp = Blueprint('applicants', __name__)
 
 @applicants_bp.route('/apply/<int:job_id>', methods=['GET', 'POST'])
 @login_required
 def apply(job_id):
-    job = Job.query.get_or_404(job_id)
-    form = ApplicationForm()
+    job = Job.query.get(job_id)
+    if job is None:
+        flash('Invalid job ID', 'danger')
+        return redirect(url_for('job_board.index'))
 
+    form = ApplicationForm()
     if form.validate_on_submit():
+        file = form.resume.data
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+
         application = Application(
             name=form.name.data,
             email=form.email.data,
             phone=form.phone.data,
-            resume=form.resume.data,
-            job_id=job.id
+            resume=filepath,
+            date_applied=datetime.now(),
+            job_id=job_id,
+            user_id=current_user.id
         )
         db.session.add(application)
         db.session.commit()
-        return redirect(url_for('jobs.job_detail', job_id=job.id))
 
-    return render_template('apply.html', job=job, form=form)
+        flash('Your application has been submitted', 'success')
+        return redirect(url_for('job_board.index'))
+
+    return render_template('apply.html', form=form, job=job)
 
 
 @applicants_bp.route('/applications')
