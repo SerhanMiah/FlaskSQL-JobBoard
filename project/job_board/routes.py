@@ -6,8 +6,8 @@ job_board = Blueprint('job_board', __name__)
 
 @job_board.route('/')
 def index():
-    jobs = Job.query.all()
-    return render_template('index.html', jobs=jobs)
+    form = JobForm()
+    return render_template('index.html', form=form)
 
 @job_board.route('/search', methods=['GET', 'POST'])
 def search():

@@ -1,27 +1,75 @@
 {% extends "base.html" %}
 
-{% block title %}Register{% endblock %}
-
 {% block content %}
-  <h1>Register</h1>
-  <form method="POST" action="{{ url_for('users.register') }}">
-    <div class="mb-3">
-      <label for="username" class="form-label">Username:</label>
-      <input type="text" id="username" name="username" class="form-control" required>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">{{ form.username.label }}</div>
+        <div class="card-body">
+          <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {% if form.username.errors %}
+              {{ form.username(class="form-control is-invalid", placeholder="Enter Username") }}
+              <div class="invalid-feedback">
+                {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.username(class="form-control", placeholder="Enter Username") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+              {{ form.email.label }}
+              {% if form.email.errors %}
+              {{ form.email(class="form-control is-invalid", placeholder="Enter Email") }}
+              <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.email(class="form-control", placeholder="Enter Email") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+              {{ form.password.label }}
+              {% if form.password.errors %}
+              {{ form.password(class="form-control is-invalid", placeholder="Enter Password") }}
+              <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.password(class="form-control", placeholder="Enter Password") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+              {{ form.confirm_password.label }}
+              {% if form.confirm_password.errors %}
+              {{ form.confirm_password(class="form-control is-invalid", placeholder="Confirm Password") }}
+              <div class="invalid-feedback">
+                {% for error in form.confirm_password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
+              {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </div>
+      </div>
+      <div class="card mt-4">
+        <div class="card-body">
+          <p class="card-text">Already have an account? <a href="{{ url_for('users.login') }}">Sign in</a></p>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email:</label>
-      <input type="text" id="email" name="email" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password:</label>
-      <input type="password" id="password" name="password" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="confirm_password" class="form-label">Confirm Password:</label>
-      <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-  </form>
-  <p>Already have an account? <a href="{{ url_for('users.login') }}">Login here.</a></p>
-{% endblock %}
+  </div>
+</div>
+{% endblock content %}
