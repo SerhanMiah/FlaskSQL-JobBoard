@@ -53,6 +53,25 @@
                                 {{ form.submit(class="btn btn-primary btn-block") }}
                             </div>
                         </form>
+                        <h1>My Applications</h1>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Date Applied</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for application in applications %}
+                                    <tr>
+                                        <td>{{ application.job.title }}</td>
+                                        <td>{{ application.date_applied.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                        <td>{{ application.status }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

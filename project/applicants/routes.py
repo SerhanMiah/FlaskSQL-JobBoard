@@ -2,7 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for
 from .forms import ApplicationForm
 from project.models import Job, Application
 from project import db
-from flask_login import login_required
+from flask_login import login_required, current_user
+
 
 applicants_bp = Blueprint('applicants', __name__)
 
@@ -24,7 +25,8 @@ def apply(job_id):
         db.session.commit()
         return redirect(url_for('jobs.job_detail', job_id=job.id))
 
-    return render_template('apply.html', form=form, job=job)
+    return render_template('apply.html', job=job, form=form)
+
 
 @applicants_bp.route('/applications')
 def application_list():
@@ -35,3 +37,9 @@ def application_list():
 def application_detail(application_id):
     application = Application.query.get_or_404(application_id)
     return render_template('application_detail.html', application=application)
+
+@applicants_bp.route('/my_applications')
+@login_required
+def my_applications():
+    applications = Application.query.filter_by(user_id=current_user.id).all()
+    return render_template('my_applications.html', applications=applications)

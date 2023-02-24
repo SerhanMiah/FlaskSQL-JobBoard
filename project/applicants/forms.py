@@ -7,3 +7,4 @@ class ApplicationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     phone = StringField('Phone', validators=[DataRequired()])
     resume = FileField('Resume', validators=[Optional()])
+

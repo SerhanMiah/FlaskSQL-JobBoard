@@ -54,7 +54,7 @@ class Application(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), nullable=False)
-    cover_letter = db.Column(db.String(1000))
+    phone = db.Column(db.String(20), nullable=False)
     resume = db.Column(db.String(120), nullable=False)
     date_applied = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     job_id = db.Column(db.Integer, db.ForeignKey('job.id'), nullable=False)
