@@ -2,10 +2,12 @@ from flask import Blueprint, render_template, redirect, url_for
 from .forms import ApplicationForm
 from project.models import Job, Application
 from project import db
+from flask_login import login_required
 
 applicants_bp = Blueprint('applicants', __name__)
 
 @applicants_bp.route('/apply/<int:job_id>', methods=['GET', 'POST'])
+@login_required
 def apply(job_id):
     job = Job.query.get_or_404(job_id)
     form = ApplicationForm()

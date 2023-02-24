@@ -1,6 +1,7 @@
 from flask import render_template, request, Blueprint
 from flask_login import LoginManager, current_user
 from project.models import Job
+from datetime import datetime
 
 # similar to the app.route change it, name thing.
 main = Blueprint('main', __name__)

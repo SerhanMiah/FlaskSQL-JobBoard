@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 
-{% block content%}
-   
-    <h1>about page</h1>
+{% block title %}
+About Me - Job Board and Management by Serhan Miah
+{% endblock %}
 
-    
-{% endblock content %}
+{% block content %}
+  <div class="about-container">
+    <h1 class="text-center mt-5 about-title">About Me</h1>
+    <p class="lead">Welcome to my job board and management website! My name is Serhan Miah and I'm the creator of this platform. I developed this site to provide a reliable and easy-to-use platform for job seekers and employers to connect and find the right opportunities or candidates.</p>
+    <p class="lead">With my extensive experience in human resources and management, I understand the challenges faced by both job seekers and employers. This is why I've designed this platform to provide a seamless experience for everyone involved.</p>
+    <p>Thank you for using my website and I hope it helps you achieve your career goals or find the perfect candidate for your company.</p>
+    <p class="lead">For more information or to connect with me, please visit my GitHub page:</p>
+    <a class="about-link" href="https://github.com/SerhanMiah" target="_blank" class="btn btn-primary">Visit my GitHub page</a>
+  </div>
+{% endblock %}

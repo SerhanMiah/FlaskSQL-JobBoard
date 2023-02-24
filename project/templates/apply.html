@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Apply for {{ job.title }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <h1>Apply for {{ job.title }}</h1>
+    <form method="POST" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        <label for="name">Name:</label>
+        {{ form.name(class="form-control", placeholder="Enter your name") }}
+      </div>
+      <div class="form-group">
+        <label for="email">Email address:</label>
+        {{ form.email(class="form-control", placeholder="Enter your email address") }}
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone number:</label>
+        {{ form.phone(class="form-control", placeholder="Enter your phone number") }}
+      </div>
+      <div class="form-group">
+        <label for="resume">Resume:</label>
+        {{ form.resume(class="form-control-file") }}
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+{% endblock %}

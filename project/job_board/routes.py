@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, abort
 from project import db
 from project.models import Job
 from project.job_board.forms import JobForm
@@ -15,14 +15,17 @@ def index():
 def search():
     if request.method == 'POST':
         keyword = request.form.get('keyword')
-        results = Job.query.filter(Job.title.ilike(f'%{keyword}%') | Job.description.ilike(f'%{keyword}%')).all()
-        return render_template('search_results.html', results=results)
+        jobs = Job.query.filter(Job.title.ilike(f'%{keyword}%') | Job.description.ilike(f'%{keyword}%')).all()
+        return render_template('search_results.html', jobs=jobs)
     return render_template('search.html')
 
 @job_board.route('/job/<int:job_id>')
 def job_detail(job_id):
-    job = Job.query.get_or_404(job_id)
+    job = Job.query.get(job_id)
+    if not job:
+        return abort(404)
     return render_template('job.html', job=job)
+
 
 @job_board.route('/new_job', methods=['GET', 'POST'])
 def new_job():
