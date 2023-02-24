@@ -1,13 +1,15 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from project.models import db, Job
+from project import db
+from project.models import Job
 from project.job_board.forms import JobForm
 
 job_board = Blueprint('job_board', __name__)
 
 @job_board.route('/')
 def index():
-    form = JobForm()
-    return render_template('index.html', form=form)
+    jobs = Job.query.filter_by(is_active=True).all()
+    print(jobs)
+    return render_template('index.html', jobs=jobs)
 
 @job_board.route('/search', methods=['GET', 'POST'])
 def search():
@@ -18,7 +20,7 @@ def search():
     return render_template('search.html')
 
 @job_board.route('/job/<int:job_id>')
-def job(job_id):
+def job_detail(job_id):
     job = Job.query.get_or_404(job_id)
     return render_template('job.html', job=job)
 

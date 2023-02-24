@@ -2,6 +2,7 @@ from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 from project import db, login_manager
 from flask_login import UserMixin
 from flask import current_app
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -36,9 +37,27 @@ class User(db.Model, UserMixin):
 class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(500), nullable=False)
+    company = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(1000), nullable=False)
     location = db.Column(db.String(100), nullable=False)
-    salary = db.Column(db.String(50), nullable=False)
+    salary_min = db.Column(db.Integer)
+    salary_max = db.Column(db.Integer)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
+    applicants = db.relationship('Application', backref='job', lazy=True)
 
     def __repr__(self):
-        return f"Job(id={self.id}, title='{self.title}', location='{self.location}', salary='{self.salary}')"
+        return f"Job(id={self.id}, title='{self.title}', company='{self.company}', location='{self.location}', salary_min='{self.salary_min}', salary_max='{self.salary_max}', date_posted='{self.date_posted}', is_active='{self.is_active}')"
+
+
+class Application(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    cover_letter = db.Column(db.String(1000))
+    resume = db.Column(db.String(120), nullable=False)
+    date_applied = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    job_id = db.Column(db.Integer, db.ForeignKey('job.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Application(id={self.id}, name='{self.name}', email='{self.email}', date_applied='{self.date_applied}')"

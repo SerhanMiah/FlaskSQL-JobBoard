@@ -1,16 +1,14 @@
 from flask import render_template, request, Blueprint
 from flask_login import LoginManager, current_user
+from project.models import Job
 
 # similar to the app.route change it, name thing.
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    if current_user.is_authenticated:
-        username = current_user.username
-    else:
-        username = None
-    return render_template('index.html', username=username)
+    jobs = Job.query.filter_by(is_active=True).all()
+    return render_template('index.html', jobs=jobs)
 
 
 @main.route("/about")
