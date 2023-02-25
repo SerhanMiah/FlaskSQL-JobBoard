@@ -1,8 +1,6 @@
 # FlaskSQL-JobBoard
 #### Video Demo:  <URL HERE>
 #### Description:
-
-
   ## Final Project 
 
 For my final project, I built a full-stack web application using a combination of Flask, Python, CLI, AJAX, JavaScript, NodeJS, React, Bootstrap, Insomnia, and SQLite3. The project consists of a backend API built with Flask that connects to a frontend web application built with React and Bootstrap. The API is powered by a SQLite3 database and supports CRUD operations for managing resources.

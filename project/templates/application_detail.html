@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="mb-4">Application Details</h1>
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title mb-0">{{ application.job.title }}</h5>
+    </div>
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-muted">Application Status: {{ application.status }}</h6>
+      <form action="{{ url_for('applicants.update_application_status', application_id=123, status='accepted') }}" method="post">
+        <div class="input-group">
+          <select class="form-select" name="status">
+            <option value="Accepted" {% if application.status == 'Accepted' %} selected {% endif %}>Accepted</option>
+            <option value="Declined" {% if application.status == 'Declined' %} selected {% endif %}>Declined</option>
+            <option value="Rejected" {% if application.status == 'Rejected' %} selected {% endif %}>Rejected</option>
+            <option value="Other" {% if application.status not in ['Accepted', 'Declined', 'Rejected'] %} selected {% endif %}>Other</option>
+          </select>
+          <button type="submit" class="btn btn-outline-secondary">Update</button>
+        </div>
+      </form>
+      <p class="card-text">{{ application.cover_letter }}</p>
+    </div>
+  </div>
+{% endblock %}

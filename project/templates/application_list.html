@@ -12,8 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      {% for application in applications %}
-        <tr>
+      {% for application in current_user.applications %}
+          <tr>
           <td>{{ application.id }}</td>
           <td>{{ application.job.title }}</td>
           <td>

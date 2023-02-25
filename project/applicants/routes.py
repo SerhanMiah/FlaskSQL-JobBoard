@@ -90,3 +90,4 @@ def update_application_status(application_id, status):
 
     flash(f'Application status changed to {status} successfully', 'success')
     return redirect(url_for('applicants.application_detail', application_id=application_id))
+
