@@ -76,3 +76,17 @@ def delete_application(application_id):
     flash('Application deleted successfully', 'success')
     return redirect(url_for('applicants.my_applications'))
 
+
+@applicants_bp.route('/applications/<int:application_id>/status/<string:status>', methods=['POST'])
+@login_required
+def update_application_status(application_id, status):
+    application = Application.query.get_or_404(application_id)
+    if application.user_id != current_user.id:
+        flash('You do not have permission to update the status of this application', 'danger')
+        return redirect(url_for('applicants.my_applications'))
+
+    application.status = status
+    db.session.commit()
+
+    flash(f'Application status changed to {status} successfully', 'success')
+    return redirect(url_for('applicants.application_detail', application_id=application_id))

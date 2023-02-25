@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="mb-4">Application Tracking</h1>
+  <table class="table">
+    <thead class="table-header">
+      <tr>
+        <th class="header-cell">Application ID</th>
+        <th class="header-cell">Job Title</th>
+        <th class="header-cell">Application Status</th>
+        <th class="header-cell">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for application in applications %}
+        <tr>
+          <td>{{ application.id }}</td>
+          <td>{{ application.job.title }}</td>
+          <td>
+            <form action="{{ url_for('applicants.update_application_status', application_id=application.id, status='accepted') }}" method="post">
+              <div class="input-group">
+                <select class="form-select" name="status">
+                  <option value="Accepted" {% if application.status == 'Accepted' %} selected {% endif %}>Accepted</option>
+                  <option value="Declined" {% if application.status == 'Declined' %} selected {% endif %}>Declined</option>
+                  <option value="Rejected" {% if application.status == 'Rejected' %} selected {% endif %}>Rejected</option>
+                  <option value="Other" {% if application.status not in ['Accepted', 'Declined', 'Rejected'] %} selected {% endif %}>Other</option>
+                </select>
+                <button type="submit" class="btn btn-outline-secondary">Update</button>
+              </div>
+            </form>
+          </td>
+          <td>
+            <a href="{{ url_for('job_board.job_detail', job_id=application.job.id) }}" class="btn btn-sm btn-outline-secondary">View Job</a>
+            <form action="{{ url_for('applicants.delete_application', application_id=application.id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this application?')">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
