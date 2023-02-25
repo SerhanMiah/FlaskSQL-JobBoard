@@ -1,4 +1,4 @@
-#!/Users/serhanmiah/Documents/Build/FlaskSQL-JobBoard/env/bin/python3.11
+#!/Users/serhanmiah/Documents/Build/FlaskSQL-JobBoard/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
