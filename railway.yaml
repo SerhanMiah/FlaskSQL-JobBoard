@@ -1,0 +1,12 @@
+$ schema: "https://railway.app/railway.schema.json"
+setup:
+  pythonVersion: "3.8"
+  packages:
+    - gcc
+    - python3-dev
+    - libpq-dev
+build:
+  builder: NIXPACKS
+  buildCommand: "source env/bin/activate && pip install -r requirements.txt"
+deploy:
+  image: "app:latest"
