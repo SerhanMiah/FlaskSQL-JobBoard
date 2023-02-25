@@ -16,15 +16,17 @@
       {% for application in applications %}
       <tr>
         <td>{{ application.job.title }}</td>
-        <td>{{ application.job.company.name }}</td>
+        <td>{{ application.job.company }}</td>
         <td>{{ application.job.location }}</td>
+        <td>{{ application.job.salary_min }}</td>
         <td>{{ application.date_applied.strftime('%b %d, %Y') }}</td>
         <td>
-          <a href="{{ url_for('jobs.job_detail', job_id=application.job_id) }}" class="btn btn-sm btn-outline-secondary">View Job</a>
+          <a href="{{ url_for('job_board.job_detail', job_id=application.job.id) }}" class="btn btn-sm btn-outline-secondary">View Job</a>
         </td>
       </tr>
       {% endfor %}
-    </tbody>
+</tbody>
+
   </table>
 </div>
 {% endblock content %}

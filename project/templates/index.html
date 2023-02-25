@@ -19,22 +19,45 @@
     </thead>
     
     <tbody>
-      {% for job in jobs %}
+      {% for job in jobs.items %}
         <tr>
-          <td><a href="/job/{{ loop.index0 }}">{{ job.title }}</a></td>
+          <td><a href="/job/{{ job.id }}">{{ job.title }}</a></td>
           <td>{{ job.description }}</td>
           <td>{{ job.location }}</td>
           <td>${{ job.salary_min }} - ${{ job.salary_max }}</td>
-          <td><a href="/apply/{{ job.id }}" class="btn btn-primary">Apply for {{ job.title }}</a></td>
+          <td><a href="/apply/{{ job.id }}" class="btn btn-primary">Apply</a></td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+  <div class="pagination">
+    {% if jobs.has_prev %}
+      <a href="{{ url_for('main.index', page=jobs.prev_num) }}" class="btn btn-info">&laquo; Previous</a>
+    {% else %}
+      <span class="btn btn-info disabled">&laquo; Previous</span>
+    {% endif %}
+    {% for page in jobs.iter_pages() %}
+      {% if page %}
+        {% if page == jobs.page %}
+          <span class="btn btn-info active">{{ page }}</span>
+        {% else %}
+          <a href="{{ url_for('main.index', page=page) }}" class="btn btn-info">{{ page }}</a>
+        {% endif %}
+      {% else %}
+        <span class="btn btn-info disabled">...</span>
+      {% endif %}
+    {% endfor %}
+    {% if jobs.has_next %}
+      <a href="{{ url_for('main.index', page=jobs.next_num) }}" class="btn btn-info">Next &raquo;</a>
+    {% else %}
+      <span class="btn btn-info disabled">Next &raquo;</span>
+    {% endif %}
+  </div>
+
   <div class="text-center">
     <p>Don't have an account?</p>
     <a href="/register" class="btn btn-primary">Register</a>
   </div>
 </div>
-
 
 {% endblock %}

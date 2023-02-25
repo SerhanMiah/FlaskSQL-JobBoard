@@ -8,8 +8,10 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    jobs = Job.query.filter_by(is_active=True).all()
+    page = request.args.get('page', 1, type=int)
+    jobs = Job.query.order_by(Job.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('index.html', jobs=jobs)
+
 
 
 @main.route("/about")

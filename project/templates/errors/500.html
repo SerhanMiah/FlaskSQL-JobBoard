@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <h1 class="mb-4">Oops! Something went wrong</h1>
+        <p class="mb-4">We're sorry, but there seems to be an internal server error.</p>
+        <p>Please try again later or contact our support team if the problem persists.</p>
+        <button class="btn btn-primary mt-4" onclick="window.history.back();">Go back</button>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

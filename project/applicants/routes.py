@@ -6,6 +6,7 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 from .forms import ApplicationForm
 from project.models import Job, Application
+from cloudinary.uploader import upload
 
 # Remove this line
 # app = create_app()
@@ -24,14 +25,14 @@ def apply(job_id):
     if form.validate_on_submit():
         file = form.resume.data
         filename = secure_filename(file.filename)
-        filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
+        response = upload(file, cloud_name=current_app.config['CLOUDINARY_CLOUD_NAME'], api_key=current_app.config['CLOUDINARY_API_KEY'], api_secret=current_app.config['CLOUDINARY_API_SECRET'])
+        file_url = response['secure_url']
 
         application = Application(
             name=form.name.data,
             email=form.email.data,
             phone=form.phone.data,
-            resume=filepath,
+            resume=file_url,
             date_applied=datetime.now(),
             job_id=job_id,
             user_id=current_user.id

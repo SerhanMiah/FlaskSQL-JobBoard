@@ -28,14 +28,16 @@ def create_app(config_class=Config):
     from project.users.routes import users
     from project.main.routes import main
     from project.job_board.routes import job_board
-
+    from project.errors.handlers import errors
     # Move the import inside the create_app function
     from project.applicants.routes import applicants_bp
+
 
     
     app.register_blueprint(users)
     app.register_blueprint(main)
     app.register_blueprint(job_board)
     app.register_blueprint(applicants_bp)
+    app.register_blueprint(errors)
 
     return app

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}403 Forbidden{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">{{ block.super }}</div>
+          <div class="card-body">
+            <p class="lead">Sorry, you don't have permission to access this page.</p>
+            <p>Please check your account or contact support for more information.</p>
+            <a href="{{ url_for('job_board.index') }}" class="btn btn-primary">Go back to homepage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
