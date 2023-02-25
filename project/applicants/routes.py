@@ -61,3 +61,18 @@ def application_detail(application_id):
 def my_applications():
     applications = Application.query.filter_by(user_id=current_user.id).all()
     return render_template('my_applications.html', applications=applications)
+
+@applicants_bp.route('/applications/<int:application_id>/delete', methods=['POST'])
+@login_required
+def delete_application(application_id):
+    application = Application.query.get_or_404(application_id)
+    if application.user_id != current_user.id:
+        flash('You do not have permission to delete this application', 'danger')
+        return redirect(url_for('applicants.my_applications'))
+
+    db.session.delete(application)
+    db.session.commit()
+
+    flash('Application deleted successfully', 'success')
+    return redirect(url_for('applicants.my_applications'))
+
