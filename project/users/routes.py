@@ -97,3 +97,16 @@ def reset_token(token):
     return render_template('reset_token.html', title='Reset Password', form=form)
 
 
+@users.route('/delete_user/<int:user_id>', methods=['POST'])
+@login_required
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    if not current_user.is_admin and current_user.id != user.id:
+        flash('You are not authorized to delete this user', 'danger')
+        return redirect(url_for('main.home'))
+
+    db.session.delete(user)
+    db.session.commit()
+
+    flash('Your user has been deleted successfully', 'success')
+    return redirect(url_for('applicants.my_applications'))
