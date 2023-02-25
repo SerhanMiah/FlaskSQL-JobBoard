@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from project.config import Config
+from sass import compile
 # from flask_bootstrap import Bootstrap
 
 db = SQLAlchemy()
