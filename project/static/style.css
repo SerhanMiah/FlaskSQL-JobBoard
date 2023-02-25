@@ -194,6 +194,9 @@ margin-bottom: 10px;
   color: #ca1f1f;
   }
   
+  table, th, td {
+    border: 1px solid black;
+  }
 
   table {
     border-collapse: collapse;
