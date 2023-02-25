@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, render_template, redirect, url_for, flash, current_app
+from flask import Blueprint, render_template, redirect, url_for, flash, current_app, request
 from project import db
 from flask_login import login_required, current_user
 from datetime import datetime
@@ -77,17 +77,26 @@ def delete_application(application_id):
     return redirect(url_for('applicants.my_applications'))
 
 
-@applicants_bp.route('/applications/<int:application_id>/status/<string:status>', methods=['POST'])
+@applicants_bp.route('/applications/<int:application_id>/update_status', methods=['GET', 'POST'])
 @login_required
-def update_application_status(application_id, status):
+def update_application_status(application_id):
     application = Application.query.get_or_404(application_id)
+
     if application.user_id != current_user.id:
         flash('You do not have permission to update the status of this application', 'danger')
         return redirect(url_for('applicants.my_applications'))
 
-    application.status = status
-    db.session.commit()
+    if request.method == 'POST':
+        new_status = request.form.get('status')
+        if new_status not in ['pending', 'approved', 'rejected']:
+            flash('Invalid status', 'danger')
+            return redirect(url_for('applicants.update_application_status', application_id=application_id))
 
-    flash(f'Application status changed to {status} successfully', 'success')
-    return redirect(url_for('applicants.application_detail', application_id=application_id))
+        application.status = new_status
+        db.session.commit()
+
+        flash(f'Application status updated to {new_status}', 'success')
+        return redirect(url_for('applicants.application_detail', application_id=application.id))
+
+    return render_template('update_application_status.html', application=application)
 

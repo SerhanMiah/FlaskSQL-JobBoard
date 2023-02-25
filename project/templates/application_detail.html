@@ -8,7 +8,7 @@
     </div>
     <div class="card-body">
       <h6 class="card-subtitle mb-2 text-muted">Application Status: {{ application.status }}</h6>
-      <form action="{{ url_for('applicants.update_application_status', application_id=123, status='accepted') }}" method="post">
+      <form action="{{ url_for('applicants.update_application_status', application_id=application.id, status='accepted') }}" method="post">
         <div class="input-group">
           <select class="form-select" name="status">
             <option value="Accepted" {% if application.status == 'Accepted' %} selected {% endif %}>Accepted</option>

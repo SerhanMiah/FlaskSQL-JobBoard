@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Update Application Status</h1>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="status">Status</label>
+        <select class="form-control" id="status" name="status">
+            <option value="pending" {% if application.status == 'pending' %}selected{% endif %}>Pending</option>
+            <option value="approved" {% if application.status == 'approved' %}selected{% endif %}>Approved</option>
+            <option value="rejected" {% if application.status == 'rejected' %}selected{% endif %}>Rejected</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Status</button>
+</form>
+{% endblock %}

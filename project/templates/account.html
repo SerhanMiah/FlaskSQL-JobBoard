@@ -26,10 +26,10 @@
                     <form method="POST" action="" enctype="multipart/form-data">
                         {{ form.hidden_tag() }}
                         <fieldset class="form-group">
-                            <legend class="border-bottom mb-4 text-center">Account Info</legend>
+                            <legend class="border-bottom mb-4 text-center account-heading">Account Info</legend>
                             <div class="form-group">
                                 {{ form.username.label(class="form-control-label") }}
-
+                    
                                 {% if form.username.errors %}
                                     {{ form.username(class="form-control form-control-lg is-invalid") }}
                                     <div class="invalid-feedback">
@@ -68,11 +68,52 @@
                             {{ form.submit(class="btn btn-primary btn-block") }}
                         </div>
                     </form>
-                    <hr>
+                    
+                    <h3 class="mt-5">Job Applications</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Job Title</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for application in current_user.applications %}
+                                <tr>
+                                    <td>{{ application.id }}</td>
+                                    <td>{{ application.job.title }}</td>
+                                    <td>
+                                        {% if application.status == 'Pending' %}
+                                            <span class="badge badge-primary">Pending</span>
+                                        {% elif application.status == 'Rejected' %}
+                                            <span class="badge badge-danger">Rejected</span>
+                                        {% elif application.status == 'Interview Scheduled' %}
+                                            <span class="badge badge-info">Interview Scheduled</span>
+                                        {% elif application.status == 'Interview Completed' %}
+                                            <span class="badge badge-secondary">Interview Completed</span>
+                                        {% elif application.status == 'Offer Made' %}
+                                            <span class="badge badge-success">Offer Made</span>
+                                        {% elif application.status == 'Offer Declined' %}
+                                            <span class="badge badge-danger">Offer Declined</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('applicants.application_detail', application_id=application.id) }}" class="btn btn-secondary btn-sm">View</a>
+                                        <form action="{{ url_for('applicants.delete_application', application_id=application.id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this application?')">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                          </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
-
-{% endblock content %}
+{% endblock %}
