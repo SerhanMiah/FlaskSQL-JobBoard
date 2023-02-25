@@ -119,3 +119,21 @@ a:hover {
   background-color: #f8d7da;
   border-color: #f5c6cb;
   }
+
+
+  .navbar-nav {
+    margin-right: auto;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .navbar-nav li {
+    margin-right: 10px;
+  }
+  
+  .navbar-nav .nav-link {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 20px;
+  }
+  

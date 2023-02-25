@@ -48,17 +48,13 @@ def logout():
 
 
 # Account settings routes
-# Account settings routes
-# Account settings routes
 @users.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
-            # Upload the picture to Cloudinary and get the public ID
-            result = cloudinary.uploader.upload(form.picture.data)
-            picture_file = result["public_id"]
+            picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
@@ -68,12 +64,16 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    # Get the URL of the user's profile picture from Cloudinary
+
     if current_user.image_file:
         image_file = cloudinary.CloudinaryImage(current_user.image_file).build_url()
+        # print(image_file)
     else:
         image_file = url_for('static', filename='profile_pics/default.jpg')
+
     return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+
 
 
 
