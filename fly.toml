@@ -1,4 +1,4 @@
-# fly.toml file generated for jobboard on 2023-02-26T20:04:48Z
+# fly.toml file generated for jobboard on 2023-02-26T20:36:29Z
 
 app = "jobboard"
 kill_signal = "SIGINT"
