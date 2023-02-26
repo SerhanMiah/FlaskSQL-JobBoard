@@ -31,11 +31,13 @@ Jinja2==3.1.2
 lib50==3.0.5
 libsass==0.22.0
 MarkupSafe==2.1.2
+mod-wsgi==4.9.4
 pexpect==4.8.0
 Pillow==9.4.0
 pipenv==2023.2.18
 pipreqs==0.4.11
 platformdirs==3.0.0
+psycopg2-binary==2.9.5
 ptyprocess==0.7.0
 pycparser==2.21
 pydantic==1.10.5
