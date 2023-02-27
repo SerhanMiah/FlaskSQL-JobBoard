@@ -194,10 +194,13 @@ margin-bottom: 10px;
   color: #ca1f1f;
   }
   
+<<<<<<< HEAD
   table, th, td {
     border-style: dotted;
     border: 1px solid black;
   }
+=======
+>>>>>>> parent of 7fe459d (creating the requirement.txt file)
 
   table {
     border-collapse: collapse;
