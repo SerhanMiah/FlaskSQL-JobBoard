@@ -2,9 +2,21 @@
 <html>
   <head>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='sass/styles.scss') }}">
+  
+    {% assets "js_bundle" %}
+      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+  
+    {% assets "css_bundle" %}
+      <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+  
+    {% assets "sass_bundle" %}
+      <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+  
   </head>
+  
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">

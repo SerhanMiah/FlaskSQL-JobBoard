@@ -223,9 +223,15 @@ p {
   align-items: center;
 }
 
-.navbar-nav li {
+.navbar-nav > li > a {
+  padding: 10px 15px;
   margin-right: 10px;
 }
+
+.navbar-nav.ml-auto > li:first-child {
+  margin-right: 20px;
+}
+
 
 .navbar-nav .nav-link {
   padding: 0 10px;

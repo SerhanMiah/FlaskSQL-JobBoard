@@ -213,9 +213,15 @@ tr:nth-child(even) {
   margin-right: auto;
   }
   
-  .navbar-nav li {
-  margin-right: 10px;
+  .navbar-nav > li > a {
+    padding: 10px 15px;
+    margin-right: 10px;
   }
+  
+  .navbar-nav.ml-auto > li:first-child {
+    margin-right: 20px;
+  }
+  
   
   .navbar-nav .nav-link {
   color: #333;
