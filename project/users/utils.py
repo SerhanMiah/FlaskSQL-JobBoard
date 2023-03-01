@@ -25,11 +25,17 @@ def save_picture(form_picture):
         output_size = (250, 250)
         i = Image.open(form_picture)
         i.thumbnail(output_size)
-        i.save(picture_path)
+        # Generate a new filename for the resized image
+        resized_fn = random_hex + '_resized' + f_ext
+        resized_path = os.path.join(current_app.root_path, 'static/profile_pics', resized_fn)
+        # Save the resized image
+        i.save(resized_path)
+        return resized_fn
     except Exception as e:
         print(f"Error resizing image: {e}")
-    
-    return result['public_id']
+        return None
+
+
 
 
 

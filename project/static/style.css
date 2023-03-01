@@ -121,55 +121,6 @@ a:hover {
   border-color: #f5c6cb;
 }
 
-/* Navigation */
-.navbar {
-  background-color: #fff;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
-
-.navbar-brand,
-.navbar-nav .nav-link {
-  color: #333;
-  font-weight: 600;
-  transition: all 0.2s ease-in-out;
-}
-
-.navbar-brand:hover,
-.navbar-nav .nav-link:hover {
-  color: #007bff;
-}
-
-.navbar-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-nav li {
-  margin-right: 10px;
-}
-
-.navbar-nav .nav-link {
-  padding: 0 10px;
-}
-
-.navbar-nav.ml-auto {
-  margin-left: auto;
-}
-
-
-@media (max-width: 991.98px) {
-.navbar-nav {
-flex-direction: column;
-margin-right: 0;
-}
-
-.navbar-nav li {
-margin-right: 0;
-margin-bottom: 10px;
-}
-}
-
 /* Footer */
 .footer {
   position: fixed;
@@ -182,7 +133,8 @@ margin-bottom: 10px;
   font-weight: bold;
   left: 0;
   right: 0;
-  margin: auto;
+  margin-top: auto;
+
   }
   
   .footer a {
@@ -193,14 +145,6 @@ margin-bottom: 10px;
   text-decoration: underline;
   color: #ca1f1f;
   }
-  
-<<<<<<< HEAD
-  table, th, td {
-    border-style: dotted;
-    border: 1px solid black;
-  }
-=======
->>>>>>> parent of 7fe459d (creating the requirement.txt file)
 
   table {
     border-collapse: collapse;
@@ -249,3 +193,53 @@ tr:nth-child(even) {
     padding: 6px 12px;
     font-size: 14px;
 }
+
+
+/* Navigation */
+.navbar {
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+  
+  .navbar-brand {
+  font-weight: 600;
+  color: #333;
+  }
+  
+  .navbar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: auto;
+  }
+  
+  .navbar-nav li {
+  margin-right: 10px;
+  }
+  
+  .navbar-nav .nav-link {
+  color: #333;
+  font-weight: 600;
+  padding: 0 10px;
+  transition: all 0.2s ease-in-out;
+  }
+  
+  .navbar-nav .nav-link:hover {
+  color: #007bff;
+  }
+  
+  .navbar-nav.ml-auto {
+  margin-left: auto;
+  }
+  
+  @media (max-width: 991.98px) {
+  .navbar-nav {
+  flex-direction: column;
+  margin-right: 0;
+  }
+  
+  .navbar-nav li {
+  margin-right: 0;
+  margin-bottom: 10px;
+  }
+  }
