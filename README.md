@@ -5,7 +5,7 @@
   
 You will find the completed project here: https://cs50-final-project-flasksql.up.railway.app/
 
-For my final project, I built a full-stack web application using a combination of Flask, Python, CLI, AJAX, JavaScript, NodeJS, React, Bootstrap, Insomnia, and SQLite3. The project consists of a backend API built with Flask that connects to a frontend web application built with React and Bootstrap. The API is powered by a SQLite3 database and supports CRUD operations for managing resources.
+For my final project, I built a full-stack web application using a combination of Flask, Python, CLI, AJAX, JavaScript, NodeJS, Bootstrap, Insomnia, and SQLite3. The project consists of a backend API built with Flask that connects to a frontend web application built with React and Bootstrap. The API is powered by a SQLite3 database and supports CRUD operations for managing resources.
 
 One of the main features of the project is its CLI interface, which allows users to interact with the backend API using a command-line interface. The CLI is built with Python and supports a variety of commands for querying, creating, updating, and deleting resources.
 
