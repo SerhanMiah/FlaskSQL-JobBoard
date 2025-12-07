@@ -81,7 +81,7 @@ mdurl==0.1.2
 # mod-wsgi==4.9.4
 multidict==6.0.4
 multiprocess==0.70.14
-# mysqlclient==2.1.1
+# mysqlclient==2.1.1cl
 package-name==0.1
 packaging==23.0
 pathspec==0.9.0
